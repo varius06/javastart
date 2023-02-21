@@ -1,3 +1,5 @@
+package com.startjava.lesson1.fin;
+
 public class MyFirstGame {
     public static void main(String[] args) {
         int from = 1;
@@ -16,6 +18,5 @@ public class MyFirstGame {
             myNum = (from + to) / 2;
         }
         System.out.println("Вы угадали! Я загадывал " + myNum);
-
     }
 }

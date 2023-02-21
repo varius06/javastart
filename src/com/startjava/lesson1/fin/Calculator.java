@@ -1,3 +1,5 @@
+package com.startjava.lesson1.fin;
+
 public class Calculator {
     public static void  main(String[] args) {
         int a = 5;
