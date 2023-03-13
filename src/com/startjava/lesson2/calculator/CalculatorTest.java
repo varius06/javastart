@@ -4,20 +4,22 @@ import java.util.Scanner;
 public class CalculatorTest {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Calculator calculator = new Calculator();
         String answer = "yes";
-        while (!answer.equals("no")) {
-            System.out.print("Введите первое число: ");
-            calculator.setNumberOne(in.nextInt());
-            System.out.print("Введите знак математической операции: ");
-            calculator.setSign(in.next().charAt(0));
-            System.out.print("Введите второе число: ");
-            calculator.setNumberTwo(in.nextInt());
-            calculator.calc();
-            do {
-                System.out.print("Хотите продолжить вычисления? [yes/no]:");
-                answer = in.next();
-            } while (!answer.equals("yes") && !answer.equals("no"));
-        }
+        do{
+            if ("yes".equals(answer)){
+                while (true){
+                    System.out.print("Введите опрацию ");
+                    String expression = in.nextLine();
+                    try {
+                        Calculator.calc(expression);
+                    }catch (NumberFormatException e){
+                        System.out.println("Некорректный тип операции");
+                    }
+                    break;
+                }
+            }
+            System.out.print("Хотите продолжить опрацию ");
+            answer = in.nextLine();
+        }while (!"no".equals(answer));
     }
 }
