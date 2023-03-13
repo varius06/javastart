@@ -4,47 +4,33 @@ import java.util.Random;
 import java.util.Scanner;
 public class GuessNumber {
     private int number;
-    private Player playerOne;
-    private Player playerTwo;
+    private Player [] players;
     private Scanner scanner;
     private boolean endGame = false;
-    GuessNumber(Player playerOne, Player playerTwo) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+    GuessNumber(Player ... players) {
+        this.players = players;
         scanner = new Scanner(System.in);
     }
     public void startGame() {
         Random generator = new Random();
         this.number = generator.nextInt(12);
-        while(playerTwo.getCheckAttempt() && playerTwo.getCheckAttempt()) {
-            if(playerOne.getCheckAttempt()) {
-                System.out.print("Введите число первого игрока: ");
-                playerOne.setNumber(scanner.nextInt());
-                playerOne.saveNumbers(playerOne.getNumber());
-                if(view(number, playerOne)) {
-                    playerOne.setCheckAttempt(false);
-                    playerTwo.setCheckAttempt(false);
+
+        while(!endGame) {
+            for (Player player : players) {
+                if(player.getCheckAttempt()) {
+                    player.setNumber(scanner);
+                    if(view(number, player)) {
+                        break;
+                    }
                 }
             }
-
-            if(playerTwo.getCheckAttempt()) {
-                System.out.print("Введите число второго игрока: ");
-                playerTwo.setNumber(scanner.nextInt());
-                playerTwo.saveNumbers(playerTwo.getNumber());
-                if(view(number, playerTwo)) {
-                    playerOne.setCheckAttempt(false);
-                    playerTwo.setCheckAttempt(false);
-                }
-            }
-
         }
-        playerTwo.clearNumbers();
-        playerOne.clearNumbers();
-        endGame = false;
-        playerOne.setAttempt(0);
-        playerTwo.setAttempt(0);
-        playerOne.setCheckAttempt(true);
-        playerTwo.setCheckAttempt(true);
+
+        for (Player player : players) {
+            player.setAttempt(0);
+            player.setCheckAttempt(true);
+        }
+        this.endGame = false;
     }
 
     private boolean view(int number, Player player) {
