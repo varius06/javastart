@@ -19,29 +19,14 @@ public class Player {
     public int getNumber() {
         return this.number;
     }
-    public void setNumber(Scanner scanner) {
-        System.out.print("Введите число " + name + " игрока: ");
-        int num = scanner.nextInt();
-        if (num > MIN && num <= MAX) {
-            number = num;
-            if (attempt <= LIMIT){
-                playerNumbers[attempt] = number;
-                attempt++;
-            }
-            if (attempt == LIMIT) {
-                checkAttempt = false;
-            }
-        } else {
-            do {
-                System.out.println("Невнрный диопазон чисел ");
-                System.out.print("Введите число " + name + " игрока: ");
-                num = scanner.nextInt();
-                if(num > MIN && num <= MAX) {
-                    number = num;
-                    break;
-                }
-            } while (true);
-
+    public void setNumber(int number) {
+        if (attempt <= LIMIT){
+            this.number = number;
+            playerNumbers[attempt] = number;
+            attempt++;
+        }
+        if (attempt == LIMIT) {
+            checkAttempt = false;
         }
     }
     public String getName() {
